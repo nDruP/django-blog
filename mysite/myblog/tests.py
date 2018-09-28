@@ -1,9 +1,9 @@
 from django.test import TestCase
 from django.contrib.auth.models import User
-from myblog.models import Post
-from myblog.models import Category
+from myblog.models import Post, Category
 import datetime
 from django.utils.timezone import utc
+
 
 
 class PostTestCase(TestCase):
@@ -18,6 +18,7 @@ class PostTestCase(TestCase):
         actual = str(p1)
         self.assertEqual(expected, actual)
 
+        
 class CategoryTestCase(TestCase):
 
     def test_string_representation(self):
@@ -26,6 +27,7 @@ class CategoryTestCase(TestCase):
         actual = str(c1)
         self.assertEqual(expected, actual)
 
+        
 class FrontEndTestCase(TestCase):
     """test views provided in the front-end"""
     fixtures = ['myblog_test_fixture.json', ]
@@ -55,3 +57,19 @@ class FrontEndTestCase(TestCase):
                 self.assertContains(resp, title, count=1)
             else:
                 self.assertNotContains(resp, title)
+
+    def test_details_only_published(self):
+        for count in range(1, 11):
+            title = "Post %d Title" % count
+            try:
+                post = Post.objects.get(title="Post %d Title" % count)
+                resp = self.client.get('/posts/%d/' % post.pk)
+            except Post.DoesNotExist:
+                post = None
+                resp = self.client.get('/posts/-1')
+            if count < 6:
+                self.assertEqual(resp.status_code, 200)
+                self.assertContains(resp, title)
+            else:
+                self.assertEqual(resp.status_code, 404)
+
