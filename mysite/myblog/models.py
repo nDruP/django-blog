@@ -22,3 +22,13 @@ class Category(models.Model):
 
     class Meta:
         verbose_name_plural = 'Categories'
+
+
+class Comment(models.Model):
+    author = models.CharField(max_length=128)
+    text = models.CharField(max_length=480)
+    published_date = models.DateTimeField(auto_now=True)
+    post = models.ForeignKey(Post)
+    
+    def __str__(self):
+        return str(self.author)+str(self.published_date)
