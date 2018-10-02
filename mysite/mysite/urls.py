@@ -28,9 +28,9 @@ router.register(r'categories', views.CategoryViewSet)
 
 
 urlpatterns = [
-    url(r'^', include(router.urls)),
+    url(r'^api', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^blog/', include('myblog.urls')),
+    url(r'^', include('myblog.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^login/$', login, {'template_name': 'login.html'}, name="login"),
     url(r'^logout/$', logout, {'next_page': '/'}, name="logout"),
