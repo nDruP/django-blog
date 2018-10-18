@@ -1,6 +1,6 @@
 server {
        listen 80;
-       server_name <your-public-dns-name>;
+       server_name p7230-ubuntu030000.westus.cloudapp.azure.com;
        access_log /var/log/nginx/django.log;
        location /static/ {
        		root /home/py230admin/django-blog;
