@@ -5,3 +5,5 @@ share/
 *.pyc
 *.db
 *.sqlite3
+production.py
+__init__.py

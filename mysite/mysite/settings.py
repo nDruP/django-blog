@@ -23,9 +23,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '7yn8sfn4)x_sla051*2--9^d2v6%a5ns8pxa%0_^@7t+#1cqx_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+#when you do live your site then check DEBUG is False
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost','yourdomain.com']
 
 
 # Application definition
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #this is appname
     'myblog',
     'rest_framework',
 ]
@@ -120,5 +122,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFIELS_DIRS=[
+    os.path.join(BASE_DIR,'static')
+]
+MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
+Logout_URl='/login/'

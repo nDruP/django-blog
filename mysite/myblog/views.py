@@ -3,12 +3,11 @@ from django import forms
 from django.utils import timezone
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.template import loader
-from myblog.models import Post, Category, Comment
+from .models import Post, Category, Comment
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
-from myblog.serializers import UserSerializer, GroupSerializer, PostSerializer, CategorySerializer
-from myblog.forms import MyCommentForm
-
+from .serializers import UserSerializer, GroupSerializer, PostSerializer, CategorySerializer
+from .forms import MyCommentForm
 
 
 def stub_view(request, *args, **kwargs):

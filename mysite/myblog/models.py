@@ -4,7 +4,9 @@ from django.contrib.auth.models import User
 class Post(models.Model):
     title = models.CharField(max_length=128)
     text = models.TextField(blank=True)
-    author = models.ForeignKey(User)
+    # author = models.ForeignKey(User)
+    #django 2 in use on_delete=models.CASCADE
+    author = models.ForeignKey(User,on_delete=models.CASCADE)    
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
     published_date = models.DateTimeField(blank=True, null=True)
@@ -13,8 +15,8 @@ class Post(models.Model):
         return self.title
 
 class Category(models.Model):
-    name = models.CharField(max_length=128)
-    description = models.TextField(blank=True)
+    name = models.CharField(max_length=200)
+    description = models.TextField(blank=False)
     posts = models.ManyToManyField(Post, blank=True, related_name='categories')
 
     def __str__(self):
@@ -25,10 +27,10 @@ class Category(models.Model):
 
 
 class Comment(models.Model):
-    author = models.CharField(max_length=128)
-    text = models.CharField(max_length=480)
+    author = models.CharField(max_length=200)
+    text = models.CharField(max_length=500)
     published_date = models.DateTimeField(auto_now=True)
-    post = models.ForeignKey(Post)
+    post = models.ForeignKey(Post,on_delete=models.CASCADE)    
     
     def __str__(self):
-        return str(self.author)+str(self.published_date)
+        return "{} {}".format(self.author,self.published_date)
